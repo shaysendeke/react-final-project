@@ -8,6 +8,8 @@ import NotFound from "./components/NotFound";
 import Discover from "./pages/Discover";
 import ReadingList from "./pages/ReadingList";
 import CompletedLit from "./pages/CompletedList";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function App() {
   // const [view, setView] = useState(true);
@@ -32,13 +34,20 @@ function App() {
     const temp=[...completedList]
     temp.splice(index,1)
     setCompletedList(temp)
-    // Swal.fire({
-    //   title: 'Error!',
-    //   text: 'Do you want to continue',
-    //   icon: 'error',
-    //   confirmButtonText: 'Cool'
-    // })
-        // console.log("deleted");
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })        // console.log("deleted");
   }
   const getReadingList = ()=>readingList;
   return (

@@ -3,6 +3,9 @@ import axios from 'axios'
 import './discover.css'
 
 export default function Discover({setReadingList, setAllBooks,getReadingList}) {
+    
+
+    
     const [books, setBooks] = useState([])
     // const [readingList, setReadingList] = useState([])
     useEffect(getData,[])
@@ -18,9 +21,11 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
         
     axios.request(options)
     .then(function (response) {
+        let data = response.data
+        console.log(response);
         setBooks(response.data.Books)
         setAllBooks(response.data.Books)
-        console.log(response.data);
+        console.log(response.data.Books);
     }).catch(function (error) {
         console.error(error);
     });
@@ -29,10 +34,10 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     // axios.get()
     const addBookUrl = "https://cdn-icons-png.flaticon.com/128/2780/2780007.png"
    const elements =  books.map((book, id)=> 
-    <div key={id}>
+    <div   key={id}>
     <p >Author: {book.author} </p>
     <p>Title: "{book.title}"</p>
-    <p className='bookDescription'>Description:</p>
+    <p >Description:</p>
     <p>"{book.description}"</p>
     <img src={book.imgUrl}/><br/>
     <img src={addBookUrl} className='bookImg'
@@ -45,6 +50,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
         />
     <hr></hr>
     </div>)
+    
     return (
         <div>
         <div>

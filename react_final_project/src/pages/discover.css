@@ -7,6 +7,7 @@
   border: 0.5px, solid black;
   margin-left: 17%;
   margin-right: 17%;
+  
 }
 
 .bookImg {
@@ -16,6 +17,6 @@
 
 .bookDescription {
     height: 1px;
-    overflow: hidden;
-    background-color: chartreuse;
+    overflow: hidden; 
+   
 }

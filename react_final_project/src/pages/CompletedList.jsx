@@ -1,4 +1,5 @@
 import { React, useEffect } from "react";
+import StarRating from "../components/Stars";
 
 export default function CompletedList({
   readingList,
@@ -26,7 +27,10 @@ export default function CompletedList({
         onClick={()=>
           removeFromCompletedlist(id)
         }
+        
       />
+            <StarRating/>
+
       <hr></hr>
     </div>
   ));

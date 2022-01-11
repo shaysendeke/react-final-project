@@ -38,5 +38,14 @@
 }
 
 button {
-  font-size: calc(15px);
+  background-color: transparent;
+  border: none;
+  outline: black;
+  cursor: pointer;
+}
+.on {
+  color: goldenrod;
+}
+.off {
+  color: #ccc;
 }
