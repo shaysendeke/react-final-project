@@ -2,12 +2,11 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import './discover.css'
 
-export default function Discover() {
+export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     const [books, setBooks] = useState([])
+    // const [readingList, setReadingList] = useState([])
     useEffect(getData,[])
-
     function getData(){
-
         const options = {
           method: 'GET',
           url: 'https://bookshelves.p.rapidapi.com/books',
@@ -20,6 +19,7 @@ export default function Discover() {
     axios.request(options)
     .then(function (response) {
         setBooks(response.data.Books)
+        setAllBooks(response.data.Books)
         console.log(response.data);
     }).catch(function (error) {
         console.error(error);
@@ -27,19 +27,34 @@ export default function Discover() {
     }
     // const url = 
     // axios.get()
+    const addBookUrl = "https://cdn-icons-png.flaticon.com/128/2780/2780007.png"
    const elements =  books.map((book, id)=> 
-    <div><p key={id}>
-    <p>Author: {book.author}
-    </p>Title: "{book.title}"</p>
-    <p>Description:</p>
+    <div key={id}>
+    <p >Author: {book.author} </p>
+    <p>Title: "{book.title}"</p>
+    <p className='bookDescription'>Description:</p>
     <p>"{book.description}"</p>
-    <img src={book.imgUrl}/>
-    <p></p>
+    <img src={book.imgUrl}/><br/>
+    <img src={addBookUrl} className='bookImg'
+    title="add to reading list"
+    onClick={()=>{
+        let temp = [...getReadingList()]
+        console.log(temp);
+        temp.push(book)
+        setReadingList(temp)}}
+        />
     <hr></hr>
     </div>)
     return (
+        <div>
+        <div>
+        <h1>* THE OFFICIAL BIBLIOTECH * </h1>
+        <hr></hr>
+        </div>
         <div className='books'>
-            <p>{elements}</p>
+            {elements}
+            {/* <img src={addBookUrl}></img> */}
+        </div>
         </div>
     )
 }

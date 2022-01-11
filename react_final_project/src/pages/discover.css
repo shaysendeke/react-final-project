@@ -1,11 +1,21 @@
-.books{
-    display: flex;
+.books {
+  /* display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    border:0.5px, solid black;
-    margin-left: 17%;
-    margin-right: 17%;
+    flex-direction: row; */
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border: 0.5px, solid black;
+  margin-left: 17%;
+  margin-right: 17%;
+}
 
+.bookImg {
+  width: 35px;
+  height: 35px;
+}
+
+.bookDescription {
+    height: 1px;
+    overflow: hidden;
+    background-color: chartreuse;
 }
