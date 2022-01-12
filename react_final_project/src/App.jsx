@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Register from "./pages/Register";
 import LogIn from "./pages/LogIn";
-import { BrowserRouter, Switch, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, NavLink, Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NotFound from "./components/NotFound";
 import Discover from "./pages/Discover";
@@ -10,6 +10,7 @@ import ReadingList from "./pages/ReadingList";
 import CompletedLit from "./pages/CompletedList";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import BookSearch from "./components/BookSearch";
 
 function App() {
   // const [view, setView] = useState(true);
@@ -74,8 +75,14 @@ function App() {
         <Link to="/CompletedList">Completed List</Link>
         <span> | </span>
         <button
-        onClick={()=>setAuth(null)}>
-          Sign Out</button>
+        onClick={()=>{
+          setAuth(null)
+          return <a href="/"></a>
+        }
+          } >
+          Sign Out
+          {/* <Redirect to="/"></Redirect> */}
+          </button>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/LogIn" render={()=><LogIn setAuth={setAuth} auth={auth}/>} />
@@ -83,6 +90,7 @@ function App() {
           <Route exact path="/Discover"  render={() => <Discover  setReadingList={setReadingList} setAllBooks={setAllBooks} getReadingList={getReadingList}/>}></Route>
           <Route exact path="/ReadingList" render={() => <ReadingList  readingList={readingList} AllBooks={AllBooks} insertToComplete={insertToComplete} removeFromReadingList={removeFromReadingList}/>}></Route>
           <Route exact path="/CompletedList" render={()=> <CompletedLit completedList={completedList} removeFromCompletedlist={removeFromCompletedlist} />}></Route>
+          <Route exact path="/BookSearch" render={()=> <BookSearch getReadingList={getReadingList}/>}></Route>
 
           <Route component={NotFound}></Route>
         </Switch>

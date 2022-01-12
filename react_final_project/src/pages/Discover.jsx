@@ -40,7 +40,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     <p >Author: {book.author} </p>
     <p>Title: "{book.title}"</p>
     <p >Description:</p>
-    <p>"{book.description.slice(0, 100)}..."</p>
+    <p title="click here for more information">"{book.description.slice(0, 100)}..."</p>
     <img src={book.imgUrl}/><br/>
     <img src={addBookUrl} className='bookImg'
     title="add to reading list"
@@ -61,7 +61,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
         <SearchBar></SearchBar>
         </div>
         <div className='books'>
-            {elements}
+            {/* {elements} */}
             {/* <img src={addBookUrl}></img> */}
         </div>
         </div>

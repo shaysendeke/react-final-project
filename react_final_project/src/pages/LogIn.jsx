@@ -38,6 +38,7 @@ export default function LogIn({setAuth, auth}) {
             <form
         onSubmit={(e) => {
           e.preventDefault();
+          console.log(email);
           login();
         }}
       >
@@ -57,7 +58,7 @@ export default function LogIn({setAuth, auth}) {
         <br></br>
         <button>Log In</button>
         <p style={{ color: "red" }}>
-          {errorFromServer ? "Error Form Server " : ""}
+          {errorFromServer ? "Please Check email or password " : ""}
         </p>
       </form>
         </div>

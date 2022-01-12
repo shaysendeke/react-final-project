@@ -1,3 +1,5 @@
+import {useEffect, useState} from 'react'
+
 import "../pages/discover.css";
 
 export default function BookSearch({ books, getReadingList, setReadingList }) {
@@ -9,18 +11,18 @@ return (
       {books.map((book) => (
         <div key={book.id}>
           <p>
-            Name:
+            Name: {" "}
             {book.title}
           </p>
           <br />
           <p>
-            Author:
+            Author: {" "} 
             {book.author}
           </p>
           <br />
-          <p>
-            Description:
-            {book.description}
+          <p title="click here for more information">
+            Description: {" "}
+            {book.description.slice(0, 250)}...
           </p>
           <br />
           <img src={book.imgUrl} />

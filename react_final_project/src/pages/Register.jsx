@@ -27,10 +27,10 @@ export default function Register({setAuth, auth}) {
         console.log(error.response);
       });
     }
-    const route = ()=> {
-        <Redirect to='/LogIn'></Redirect>
-        console.log("good morning");
-};
+//     // const route = ()=> {
+//     //     <Redirect to='/LogIn'></Redirect>
+//     //     console.log("good morning");
+// };
 if(auth){
   return <Redirect to="/Discover"></Redirect>
 } 
@@ -68,7 +68,7 @@ if(auth){
         <br></br>
         <button>Register</button>
         <p style={{ color: "red" }}>
-          {errorFromServer ? "Error Form Server " : ""}
+          {errorFromServer ?  console.log(errorFromServer) : ""}
         </p>
       </form>
       <hr />
