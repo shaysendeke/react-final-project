@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import './discover.css'
+import SearchBar from '../components/SearchBar'
 
 export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     
@@ -18,14 +19,15 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
             'x-rapidapi-key': 'd85d1708e8msh524155d19f0af7ep130119jsnfc5c1006f1ee'
           }
         };
-        
+        //   const API_URL = "./books.json"
+
     axios.request(options)
     .then(function (response) {
-        let data = response.data
-        console.log(response);
-        setBooks(response.data.Books)
-        setAllBooks(response.data.Books)
-        console.log(response.data.Books);
+        let data = response.data.Books
+        console.log(data);
+        setBooks(data)
+        setAllBooks(data)
+        console.log(data);
     }).catch(function (error) {
         console.error(error);
     });
@@ -38,7 +40,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     <p >Author: {book.author} </p>
     <p>Title: "{book.title}"</p>
     <p >Description:</p>
-    <p>"{book.description}"</p>
+    <p>"{book.description.slice(0, 100)}..."</p>
     <img src={book.imgUrl}/><br/>
     <img src={addBookUrl} className='bookImg'
     title="add to reading list"
@@ -56,6 +58,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
         <div>
         <h1>* THE OFFICIAL BIBLIOTECH * </h1>
         <hr></hr>
+        <SearchBar></SearchBar>
         </div>
         <div className='books'>
             {elements}

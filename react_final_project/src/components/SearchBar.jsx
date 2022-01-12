@@ -1,36 +1,49 @@
 import { Axios } from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { apiKey } from "../logic/api"
 import axios from "axios"
+import BookSearch from "./BookSearch"
 
 export default function SearchBar() {
-    const [contacts, setContacts] = useState([])
+    const [books, setBooks] = useState([])
     const [search, setSearch] = useState('')
-
+    const options = {
+        method: 'GET',
+        url: 'https://bookshelves.p.rapidapi.com/books',
+        headers: {
+          'x-rapidapi-host': 'bookshelves.p.rapidapi.com',
+          'x-rapidapi-key': 'd85d1708e8msh524155d19f0af7ep130119jsnfc5c1006f1ee'
+        }
+      };
     useEffect(() => {
-        const API_URL = `https://bookshelves.p.rapidapi.com/books=${apiKey}`
+        // const API_URL = `https://bookshelves.p.rapidapi.com/books=${apiKey}`
         axios
-            .get(API_URL)
+            .request(options)
             .then(res => {
-                const contacts = res.data
-                setContacts(contacts)
+                const books = res.data.Books
+                setBooks(books)
             })
+            .catch(error => 
+                {
+                console.log(error)
+                })
     }, [])
 
-    const filteredContacts = search.length === 0 ? contacts : 
-    contacts.filter(contact => contact.full_name.
-                toLowerCase().includes(search.toLowerCase()))
+    const filteredBooks = search.length === 0 ? books : 
+    books.filter(book => book.description.
+    toLowerCase().includes(search.toLowerCase()))
+    console.log(filteredBooks);
 
     return (
         <div>
-            <h3>CONTACTS LIST</h3>
+            <h3>BOOKS LIST</h3>
                 <input 
                     type="text" 
                     placeholder="Search name" 
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     />
-            <List contacts={filteredContacts}/>
+            <BookSearch books={filteredBooks}/>
         </div>
     )
 }

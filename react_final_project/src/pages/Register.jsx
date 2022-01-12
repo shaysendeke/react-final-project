@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 
-export default function Register() {
+export default function Register({setAuth, auth}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,7 +19,8 @@ export default function Register() {
         password,
       })
       .then(function (response) {
-        console.log(response.data);
+        console.log(response.data)
+        setAuth(response.data);
       })
       .catch(function (error) {
         setErrorFromServer(error);
@@ -30,6 +31,10 @@ export default function Register() {
         <Redirect to='/LogIn'></Redirect>
         console.log("good morning");
 };
+if(auth){
+  return <Redirect to="/Discover"></Redirect>
+} 
+
   return (
     <div>
       <p>

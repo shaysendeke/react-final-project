@@ -20,6 +20,7 @@ export default function CompletedList({
       <p>"{book.description}"</p>
       <img src={book.imgUrl} />
       <br/>
+      <textarea rows="10" cols="50"></textarea><br />
       <img
         src={removeUrl}
         title="Remove from List"

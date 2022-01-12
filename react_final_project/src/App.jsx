@@ -16,6 +16,7 @@ function App() {
   const [readingList, setReadingList] = useState([])
   const [AllBooks, setAllBooks] = useState("")
   const [completedList, setCompletedList] = useState([])
+  const [auth, setAuth] = useState(null)
   function insertToComplete(index){
     // if(completedList.filter(item=>item.id===readingList[index].id))return false
     const temp=[...completedList]
@@ -24,6 +25,13 @@ function App() {
     temp2.splice(index,1) 
     setCompletedList(temp)
     setReadingList(temp2)
+    Swal.fire({
+      title: "Book Has Been Added To Reading List",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 2000,
+
+    })
   }
   function removeFromReadingList(index){
     const temp=[...readingList]
@@ -35,20 +43,20 @@ function App() {
     temp.splice(index,1)
     setCompletedList(temp)
     Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
-      }
-    })        // console.log("deleted");
+
+      
+        position: 'top-end',
+        icon: 'success',
+        title: 'Book Has Been Removed From Completed List',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      
+
+      
+            // console.log("deleted");
   }
+  
   const getReadingList = ()=>readingList;
   return (
     <BrowserRouter>
@@ -64,10 +72,14 @@ function App() {
         <Link to="/ReadingList">Reading List</Link>
         <span> | </span>
         <Link to="/CompletedList">Completed List</Link>
+        <span> | </span>
+        <button
+        onClick={()=>setAuth(null)}>
+          Sign Out</button>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/LogIn" component={LogIn} />
-          <Route exact path="/Register" component={Register} />
+          <Route exact path="/LogIn" render={()=><LogIn setAuth={setAuth} auth={auth}/>} />
+          <Route exact path="/Register" render={()=><Register setAuth={setAuth} auth={auth}/>} />
           <Route exact path="/Discover"  render={() => <Discover  setReadingList={setReadingList} setAllBooks={setAllBooks} getReadingList={getReadingList}/>}></Route>
           <Route exact path="/ReadingList" render={() => <ReadingList  readingList={readingList} AllBooks={AllBooks} insertToComplete={insertToComplete} removeFromReadingList={removeFromReadingList}/>}></Route>
           <Route exact path="/CompletedList" render={()=> <CompletedLit completedList={completedList} removeFromCompletedlist={removeFromCompletedlist} />}></Route>
