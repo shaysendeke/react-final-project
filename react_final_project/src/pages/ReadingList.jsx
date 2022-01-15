@@ -16,7 +16,7 @@ export default function ReadingList({ readingList, AllBooks,insertToComplete, re
       <img
         src={completeUrl}
         title="Add to Complete List"
-        className="readingList"
+        className="readingList icon-elements"
         onClick={()=>{
             insertToComplete(id)
         }}
@@ -24,7 +24,7 @@ export default function ReadingList({ readingList, AllBooks,insertToComplete, re
       <img
         src={removeUrl}
         title="Remove from Reading List"
-        className="readingList"
+        className="readingList icon-elements"
         onClick={()=>{
           removeFromReadingList(id)
       }}

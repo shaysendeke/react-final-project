@@ -3,8 +3,10 @@ import { useState, useEffect } from "react"
 import { apiKey } from "../logic/api"
 import axios from "axios"
 import BookSearch from "./BookSearch"
+// import {useNavigate, useHistory} from 'react-router-dom';
 
-export default function SearchBar() {
+
+export default function SearchBar({getReadingList, setReadingList, showSelectedBook }) {
     const [books, setBooks] = useState([])
     const [search, setSearch] = useState('')
     const options = {
@@ -43,7 +45,7 @@ export default function SearchBar() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     />
-            <BookSearch books={filteredBooks}/>
+            <BookSearch books={filteredBooks} getReadingList={getReadingList} setReadingList={setReadingList} showSelectedBook={showSelectedBook} />
         </div>
     )
 }

@@ -1,11 +1,19 @@
 import {useEffect, useState} from 'react'
+import {useHistory} from 'react-router-dom';
+
 
 import "../pages/discover.css";
 
-export default function BookSearch({ books, getReadingList, setReadingList }) {
+export default function BookSearch({ books, getReadingList, setReadingList, showSelectedBook }) {
   const addBookUrl = "https://cdn-icons-png.flaticon.com/128/2780/2780007.png"
     //   const [readingList, setReadingList] = useState([])
-
+    const history = useHistory();
+    const handleOnClick = (book) =>{
+        showSelectedBook(book)
+        history.push('/FullBook');
+    }
+        
+  
 return (
     <div>
       {books.map((book) => (
@@ -20,7 +28,7 @@ return (
             {book.author}
           </p>
           <br />
-          <p title="click here for more information">
+          <p onClick={()=> handleOnClick(book)} title="click here for more information">
             Description: {" "}
             {book.description.slice(0, 250)}...
           </p>
@@ -36,7 +44,7 @@ return (
               console.log(temp);
               temp.push(book);
               setReadingList(temp);
-              console.log(ReadingList);
+            //   console.log(ReadingList);
             }}
           />
           <hr></hr>

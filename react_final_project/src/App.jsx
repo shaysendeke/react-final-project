@@ -11,6 +11,7 @@ import CompletedLit from "./pages/CompletedList";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import BookSearch from "./components/BookSearch";
+import FullBook from "./components/FullBook";
 
 function App() {
   // const [view, setView] = useState(true);
@@ -18,16 +19,21 @@ function App() {
   const [AllBooks, setAllBooks] = useState("")
   const [completedList, setCompletedList] = useState([])
   const [auth, setAuth] = useState(null)
+  const [selectedBook, setSelectedBook] = useState()
+  function showSelectedBook(book){
+    setSelectedBook(book)
+
+  }
   function insertToComplete(index){
     // if(completedList.filter(item=>item.id===readingList[index].id))return false
     const temp=[...completedList]
     const temp2=[...readingList]
-    temp.push(readingList[index])
+    temp.push({...readingList[index], notes:""})
     temp2.splice(index,1) 
     setCompletedList(temp)
     setReadingList(temp2)
     Swal.fire({
-      title: "Book Has Been Added To Reading List",
+      title: "Book Has Been Added To Completed List",
       icon: "success",
       showConfirmButton: false,
       timer: 2000,
@@ -38,6 +44,14 @@ function App() {
     const temp=[...readingList]
     setReadingList(temp)
     temp.splice(index,1)
+    Swal.fire({     
+      position: 'top-end',
+      icon: 'success',
+      title: 'Book Has Been Removed From Reading List',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
   }
   function removeFromCompletedlist(index){
     const temp=[...completedList]
@@ -52,10 +66,15 @@ function App() {
         showConfirmButton: false,
         timer: 1500
       })
-      
-
-      
+         
             // console.log("deleted");
+  }
+  function updateCompletedBook(notes, index){
+    const temp=[...completedList]
+    temp[index].notes = notes
+    setCompletedList(temp)
+
+
   }
   
   const getReadingList = ()=>readingList;
@@ -87,10 +106,11 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/LogIn" render={()=><LogIn setAuth={setAuth} auth={auth}/>} />
           <Route exact path="/Register" render={()=><Register setAuth={setAuth} auth={auth}/>} />
-          <Route exact path="/Discover"  render={() => <Discover  setReadingList={setReadingList} setAllBooks={setAllBooks} getReadingList={getReadingList}/>}></Route>
+          <Route exact path="/Discover"  render={() => <Discover  setReadingList={setReadingList} setAllBooks={setAllBooks} getReadingList={getReadingList} showSelectedBook={showSelectedBook}/>}></Route>
           <Route exact path="/ReadingList" render={() => <ReadingList  readingList={readingList} AllBooks={AllBooks} insertToComplete={insertToComplete} removeFromReadingList={removeFromReadingList}/>}></Route>
-          <Route exact path="/CompletedList" render={()=> <CompletedLit completedList={completedList} removeFromCompletedlist={removeFromCompletedlist} />}></Route>
-          <Route exact path="/BookSearch" render={()=> <BookSearch getReadingList={getReadingList}/>}></Route>
+          <Route exact path="/CompletedList" render={()=> <CompletedLit completedList={completedList} removeFromCompletedlist={removeFromCompletedlist} updateCompletedBook={updateCompletedBook} />}></Route>
+          <Route exact path="/BookSearch" render={()=> <BookSearch getReadingList={getReadingList} setReadingList={setReadingList}/>}></Route>
+          <Route exact path="/FullBook" render={()=> <FullBook getReadingList={getReadingList} setReadingList={setReadingList} selectedBook={selectedBook}/>}></Route>
 
           <Route component={NotFound}></Route>
         </Switch>

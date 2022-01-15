@@ -49,3 +49,6 @@ button {
 .off {
   color: #ccc;
 }
+.icon-elements  {
+  cursor: pointer
+}

@@ -56,7 +56,7 @@ export default function LogIn({setAuth, auth}) {
         <br></br>
         <br />
         <br></br>
-        <button>Log In</button>
+        <button className='icon-elements'>Log In</button>
         <p style={{ color: "red" }}>
           {errorFromServer ? "Please Check email or password " : ""}
         </p>

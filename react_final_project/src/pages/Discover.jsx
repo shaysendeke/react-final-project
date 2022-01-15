@@ -3,7 +3,7 @@ import axios from 'axios'
 import './discover.css'
 import SearchBar from '../components/SearchBar'
 
-export default function Discover({setReadingList, setAllBooks,getReadingList}) {
+export default function Discover({setReadingList, setAllBooks,getReadingList, showSelectedBook}) {
     
 
     
@@ -40,9 +40,9 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
     <p >Author: {book.author} </p>
     <p>Title: "{book.title}"</p>
     <p >Description:</p>
-    <p title="click here for more information">"{book.description.slice(0, 100)}..."</p>
+    <p title="click here for more information">"{book.description.slice(0, 100)}..." </p>
     <img src={book.imgUrl}/><br/>
-    <img src={addBookUrl} className='bookImg'
+    <img src={addBookUrl} className='bookImg icon-elements'
     title="add to reading list"
     onClick={()=>{
         let temp = [...getReadingList()]
@@ -58,7 +58,7 @@ export default function Discover({setReadingList, setAllBooks,getReadingList}) {
         <div>
         <h1>* THE OFFICIAL BIBLIOTECH * </h1>
         <hr></hr>
-        <SearchBar></SearchBar>
+        <SearchBar setReadingList={setReadingList}  getReadingList={getReadingList} showSelectedBook={showSelectedBook}></SearchBar>
         </div>
         <div className='books'>
             {/* {elements} */}
