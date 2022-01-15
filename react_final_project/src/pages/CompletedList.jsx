@@ -8,8 +8,10 @@ export default function CompletedList({
   completedList,
   removeFromCompletedlist,
   updateCompletedBook
+  
 
 }) 
+
 {
   function onNoteChange(event, id){
   updateCompletedBook(event.target.value, id)

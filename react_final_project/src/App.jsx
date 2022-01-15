@@ -12,6 +12,9 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import BookSearch from "./components/BookSearch";
 import FullBook from "./components/FullBook";
+// import 'sweetalert2/src/sweetalert2.scss'
+const MySwal = withReactContent(Swal)
+
 
 function App() {
   // const [view, setView] = useState(true);
@@ -32,7 +35,7 @@ function App() {
     temp2.splice(index,1) 
     setCompletedList(temp)
     setReadingList(temp2)
-    Swal.fire({
+    MySwal.fire({
       title: "Book Has Been Added To Completed List",
       icon: "success",
       showConfirmButton: false,
@@ -44,12 +47,14 @@ function App() {
     const temp=[...readingList]
     setReadingList(temp)
     temp.splice(index,1)
-    Swal.fire({     
-      position: 'top-end',
-      icon: 'success',
+    MySwal.fire({     
+      // position: 'top-end',
+      // icon: 'success',
       title: 'Book Has Been Removed From Reading List',
-      showConfirmButton: false,
-      timer: 1500
+      focusConfirm: false, 
+      type: 'warning'
+      // showConfirmButton: false,
+      // timer: 2000
     })
 
   }
@@ -57,9 +62,7 @@ function App() {
     const temp=[...completedList]
     temp.splice(index,1)
     setCompletedList(temp)
-    Swal.fire({
-
-      
+    MySwal.fire({     
         position: 'top-end',
         icon: 'success',
         title: 'Book Has Been Removed From Completed List',
@@ -76,6 +79,7 @@ function App() {
 
 
   }
+
   
   const getReadingList = ()=>readingList;
   return (
