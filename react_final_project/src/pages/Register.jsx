@@ -68,7 +68,7 @@ if(auth){
         <br></br>
         <button>Register</button>
         <p style={{ color: "red" }}>
-          {errorFromServer ?  console.log(errorFromServer) : ""}
+        {errorFromServer ? "Please Check email or password " : ""}
         </p>
       </form>
       <hr />
